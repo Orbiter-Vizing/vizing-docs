@@ -2,46 +2,38 @@
 sidebar_position: 1
 ---
 
-# Tutorial Intro
+# Introduction
 
-Let's discover **Docusaurus in less than 5 minutes**.
+**Vizing** is an Ethereum Layer 2-based Omni-Chain interoperability protocol that supports messaging in any format.
 
-## Getting Started
+Meanwhile, Vizing is a permissionless decentralized network that provides all DApps with the ability to interact with multiple chains by integrating with Vizing.
 
-Get started by **creating a new site**.
+![Vizing-intro](./images/Vizing-intro.png)
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+Building DApps using Vizing goes beyond simple token transfers between chains. The envisioned DApp possibilities include but are not limited to:
 
-### What you'll need
+1. Cross-chain asset bridges:  
+    Rapid deployment of cross-chain asset bridges allows wrapping tokens from the original chain in the early stages of a newly deployed blockchain. This provides liquidity in the form of WTokens to the new blockchain.
+    
+2. Cross-chain lending:  
+    Cross-chain lending is a significant feature of the Vizing protocol. Users can securely and efficiently transfer assets between different blockchains, enabling borrowing and lending operations across chains. This allows users to leverage their assets on different chains, participate in a wider range of financial activities, and achieve better capital efficiency.
+    
+3. Cross-chain gaming:  
+    Vizing provides robust support for cross-chain gaming development. Game developers can seamlessly transfer game assets from one chain to another, creating a seamless cross-chain gaming experience. Players can trade, collect, and utilize game items on different blockchains, enjoying a broader gaming world and more interactive possibilities.
+    
+4. Oracles:  
+    Unlike traditional push-based oracles, Vizing protocol allows the development of pull-based oracles. This means third-party DApps can set their own intervals to fetch the latest data from other chains and apply it to on-chain smart contracts. This flexible data retrieval method provides diverse and real-time data support for various use cases, further enhancing the usability and reliability of decentralized applications.
+    
+5. Cross-chain DAO governance:  
+    Vizing protocol also supports cross-chain DAO governance, enabling governance organizations on Layer 2 to participate in decision-making and voting processes on Layer 1. This cross-chain governance model enhances the capabilities of decentralized autonomous organizations, allowing participants from different chains to collectively manage and make decisions in a consistent manner, fostering collaborative development in the blockchain ecosystem.
+    
 
-- [Node.js](https://nodejs.org/en/download/) version 18.0 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
+Please note that the above examples are just a glimpse of what the Vizing protocol can achieve. There are many other exciting application scenarios waiting for developers to explore and create. By utilizing the Vizing protocol, you can build cross-chain DApps with limitless possibilities, providing users with unparalleled experiences.
 
-## Generate a new site
 
-Generate a new Docusaurus site using the **classic template**.
 
-The classic template will automatically be added to your project after you run the command:
 
-```bash
-npm init docusaurus@latest my-website classic
-```
 
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
 
-The command also installs all necessary dependencies you need to run Docusaurus.
 
-## Start your site
 
-Run the development server:
-
-```bash
-cd my-website
-npm run start
-```
-
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
-
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
-
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.

@@ -90,7 +90,7 @@ const config: Config = {
           title: "Docs",
           items: [
             {
-              label: "Tutorial",
+              label: "VizingDocs",
               to: "/docs/intro",
             },
           ],
