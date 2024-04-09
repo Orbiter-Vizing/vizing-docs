@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Introduction
 
-**Vizing** is an Ethereum Layer 2-based Omni-Chain interoperability protocol that supports messaging in any format.
+Vizing, an omni interoperability environment built on advanced zk technology, provides a faster, more affordable, and safer Ethereum ecosystem roaming experience!
 
 Meanwhile, Vizing is a permissionless decentralized network that provides all DApps with the ability to interact with multiple chains by integrating with Vizing.
 
