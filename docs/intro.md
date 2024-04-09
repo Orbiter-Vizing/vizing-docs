@@ -13,7 +13,7 @@ Meanwhile, Vizing is a permissionless decentralized network that provides all DA
 Building DApps using Vizing goes beyond simple token transfers between chains. The envisioned DApp possibilities include but are not limited to:
 
 1. Omni-Chain asset bridges:  
-    Rapid deployment of Omni-Chain asset bridges allows wrapping tokens from the original chain in the early stages of a newly deployed blockchain. This provides liquidity in the form of WTokens to the new blockchain.
+    The rapid deployment of Omni-Chain asset bridges enables the wrapping of tokens from the original chain during the early stages of a newly deployed blockchain, thereby providing liquidity in the form of WTokens to the new blockchain.
     
 2. Omni-Chain lending:  
     Omni-Chain lending is a significant feature of the Vizing protocol. Users can securely and efficiently transfer assets between different blockchains, enabling borrowing and lending operations across chains. This allows users to leverage their assets on different chains, participate in a wider range of financial activities, and achieve better capital efficiency.
