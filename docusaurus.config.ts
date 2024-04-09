@@ -4,7 +4,8 @@ import type * as Preset from "@docusaurus/preset-classic";
 
 const config: Config = {
   title: "Vizing",
-  tagline: "Dinosaurs are cool",
+  tagline:
+    "An omni interoperability environment built on advanced zk technology",
   favicon: "img/favicon.ico",
 
   // Set the production url of your site here
@@ -61,7 +62,7 @@ const config: Config = {
       title: "Vizing",
       logo: {
         alt: "Vizing Logo",
-        src: "img/logo.svg",
+        src: "img/docusaurus.png",
       },
       items: [
         {
