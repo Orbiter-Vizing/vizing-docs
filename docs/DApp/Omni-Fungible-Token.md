@@ -41,9 +41,9 @@ fetch("https://api.orbiter.finance/sdk/chains", requestOptions)
     {
       "chainId": "1",
       "networkId": "1",
-      "internalId": 1, // 内部ID
+      "internalId": 1, 
       "name": "Ethereum",
-      "contract": { // 官方合约
+      "contract": { 
         "0xd9d74a29307cc6fc8bf424ee4217f1a587fbc8dc": "OBSource",
         "0x3be8b60ddf9feff6b2426e47a7619d7cbc786d97": "OrbiterRouterV1",
         "0xc741900276cd598060b0fe6594fbe977392928f4": "OrbiterRouterV3"
