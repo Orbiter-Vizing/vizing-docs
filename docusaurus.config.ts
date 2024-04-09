@@ -108,7 +108,7 @@ const config: Config = {
             },
             {
               label: "Twitter",
-              href: "https://twitter.com/vizing_com",
+              href: "https://twitter.com/vizing_l2",
             },
           ],
         },
