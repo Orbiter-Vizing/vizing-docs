@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
 ---
-# Omni-Fungible Token
+# Omni-Fungible-Token
 
 Through our Orbiter REST API, you can easily discover the best routes for cross-chain and bridges. Our comprehensive solution enables you to seamlessly swap or bridge assets between different blockchains. Additionally, our API support ERC20 tokens bridge, which are commonly known as Fungible tokens.
 
