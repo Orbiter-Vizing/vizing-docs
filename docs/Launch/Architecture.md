@@ -26,11 +26,12 @@ Vizing places significant importance on off-chain components. Unlike on-chain co
 
 **API**: The API provides detailed information on using Vizing for Omni-Chain communication, allowing developers to integrate and utilize Vizing's capabilities effectively.
 
-## 03 / Layer2 Rollup
+## 03 / Vizing Rollup
 
 Vizing is built on top of Layer2 Rollup, enhancing it's security and providing exceptional advantages.
 
-**Vizing Rollup**: Vizing introduces its own Layer2 network called Vizing Rollup. All information sent using Vizing is forwarded to Vizing Rollup, which eventually undergoes Validum proof and gets confirmed on the Ethereum mainnet. This integration with Layer2 Rollup ensures scalability, efficiency, and security for the Vizing protocol.
+**Vizing Rollup**: Vizing introduces it's own Layer2 network called Vizing Rollup, which is driven by zk technology. Serving as an entry point for the Vizing protocol, Vizing Rollup acts as a hub for validator staking, ensuring enhanced decentralization and security. All omni-chain message transmitted through the Vizing protocol is routed to Vizing Rollup, where it undergoes Validum proof and ultimately receives confirmation on the Ethereum mainnet. This seamless integration with Layer2 Rollup guarantees scalability, efficiency, and robust security for the Vizing protocol.
 
 With its comprehensive architecture and components, Vizing empowers developers to build robust and efficient web3 Omni-Chain protocols, enabling seamless interoperability across different blockchain networks.
 
+you can [find more Vizing resources here.](/docs/BuildOnVizing/DevelopmentEnvironment)
