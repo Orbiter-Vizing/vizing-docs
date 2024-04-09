@@ -3,15 +3,21 @@ sidebar_position: 2
 ---
 # Omni-NFT
 
+
+:::caution
+Omni-NFT is not yet live. We are currently in the process of finalizing the development and testing phases. We anticipate that Omni-NFT will be launched by the end of April. At that time, we will provide you with the contract address and relevant information regarding its usage and features.
+:::
+
+
 ## 01 / Overview
 
-Omni-NFT is a cross-chain solution for NFTs. The solution utilizes the Vizing to empower NFTs with cross-chain capabilities and allows seamless integration of standard NFT projects without modifying the NFT protocol. Through Omni-NFT, users can transfer NFT assets across different chains while retaining the ability to transfer NFTs between accounts.
+Omni-NFT is a Omni-Chain solution for NFTs. The solution utilizes the Vizing to empower NFTs with Omni-Chain capabilities and allows seamless integration of standard NFT projects without modifying the NFT protocol. Through Omni-NFT, users can transfer NFT assets across different chains while retaining the ability to transfer NFTs between accounts.
 
 ## 02 / Omni-NFT Workflow
 ![wrapNFT](../images/wrapNFT.png)
 ### Global NFT Identifier (gTokenId)
 
-Omni-NFT employs a global NFT identifier (gTokenId) to uniquely identify cross-chain transferred NFT assets. The gTokenId is computed by hashing the source network ID, NFT project address, and NFT ID, ensuring its global uniqueness. This globally unique identifier enables NFT assets to be transferred across multiple chains where Omni-NFT is deployed.
+Omni-NFT employs a global NFT identifier (gTokenId) to uniquely identify Omni-Chain transferred NFT assets. The gTokenId is computed by hashing the source network ID, NFT project address, and NFT ID, ensuring its global uniqueness. This globally unique identifier enables NFT assets to be transferred across multiple chains where Omni-NFT is deployed.
 
 | **name** | **sourceNetworkId** | **NFTProjAddress** | **NFTId**   | **gTokenId** |
 | -------- | ------------------- | ------------------ | ----------- | ------------ |
@@ -73,8 +79,8 @@ function burnNFT(address owner, bytes32 gTokenId, uint256 destNetworkId,address 
 
 The Omni-NFT solution offers the following advantages:
 
-- **Integration with Standard NFT Projects**: Omni-NFT allows direct integration of standard NFT projects without requiring modifications to the NFT protocol. This provides convenience for existing NFT projects to leverage the cross-chain functionality of Omni-NFT.
-- **Global Uniqueness Identifier**: By utilizing the global NFT identifier (gTokenId), Omni-NFT achieves global uniqueness for NFT assets across multiple chains. This ensures the uniqueness and consistency of cross-chain transferred NFT assets on different chains.
-- **Cross-Account Transfer**: Even after cross-chain transfers, NFT assets remain transferable across accounts. This enables users to freely transfer and trade NFT assets on different chains.
+- **Integration with Standard NFT Projects**: Omni-NFT allows direct integration of standard NFT projects without requiring modifications to the NFT protocol. This provides convenience for existing NFT projects to leverage the Omni-Chain functionality of Omni-NFT.
+- **Global Uniqueness Identifier**: By utilizing the global NFT identifier (gTokenId), Omni-NFT achieves global uniqueness for NFT assets across multiple chains. This ensures the uniqueness and consistency of Omni-Chain transferred NFT assets on different chains.
+- **Cross-Account Transfer**: Even after Omni-Chain transfers, NFT assets remain transferable across accounts. This enables users to freely transfer and trade NFT assets on different chains.
 
 

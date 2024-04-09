@@ -15,8 +15,8 @@ To ensure the integrity and security of the protocol, both relayers and validato
 
 - **Arbitration**: The protocol employs a stringent punishment mechanism. In cases of malicious behavior, all staked margins of the involved relayers and validators are confiscated to compensate for user losses.
     
-- **Non-Responsiveness Penalty**: Relayers are required to promptly respond to requests for cross-chain information forwarding. Failure to do so results in Vizing deducting the corresponding margin as a penalty.
+- **Non-Responsiveness Penalty**: Relayers are required to promptly respond to requests for omni-Chain information forwarding. Failure to do so results in Vizing deducting the corresponding margin as a penalty.
     
 ## 04 / Relayer - Validator Separation
 
-Users have the autonomy to select relayers for transmitting cross-chain information by simply adding relayer address information on the original chain. This separation empowers users with flexibility and control over their cross-chain interactions.
+Users have the autonomy to select relayers for transmitting omni-Chain information by simply adding relayer address information on the original chain. This separation empowers users with flexibility and control over their omni-Chain interactions.
