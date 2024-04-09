@@ -10,11 +10,11 @@ In this article, we take Alice as an example. She will utilize an asset Omni-Cha
 
 Alice initiates a Omni-Chain request on the Arbitrum network, seeking to transfer 1000 USDC from her account to the Optimism network.
 
-Before making the request, Alice may interact with a VDApp through standard interfaces provided or intuitive GUI operations to ensure her request is correctly identified and submitted to the Omni-Chain bridge for processing.
+Before making the request, Alice may interact with a VDApp (Vizing-based-DApp) through standard interfaces provided or intuitive GUI operations to ensure her request is correctly identified and submitted to the Omni-Chain bridge for processing.
 
 ## 02 / Preprocessing Omni-Chain Request by VDApp
 
-Upon receiving Alice's Omni-Chain request, the DApp on the Arbitrum network undergoes several preprocessing steps to ensure the request's validity and security.
+Upon receiving Alice's Omni-Chain request, the VDApp on the Arbitrum network undergoes several preprocessing steps to ensure the request's validity and security.
 
 In addition to checking Alice's USDC balance, VDApp performs additional security validations, such as verifying Alice's identity and authorization status, and ensuring that the Omni-Chain request complies with preset rules and restrictions.
 
