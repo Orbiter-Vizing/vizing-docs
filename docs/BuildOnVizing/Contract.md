@@ -6,14 +6,14 @@ sidebar_position: 2
 Install the Vizing standard core contract package:
 
 ```cmd
-npm install @Vizing/contracts
+npm install @vizing/contracts
 ```
 
 Incorporate Vizing core contracts into your Omni-DApp:
 
 ```solidity
 import {VizingOmni} from "@Vizing/contracts/VizingStation.sol";
-contract MyOmniChainDApp is VizingStation {
+contract MyOmniChainDApp is VizingOmni {
     constructor(address _vizingPad) VizingOmni(__vizingPad) {
 	    // Logic
     }
@@ -22,78 +22,139 @@ contract MyOmniChainDApp is VizingStation {
 
 When interacting with Vizing core contracts in your Omni-DApp, ensure that the Omni Message format is correct. You can refer to the table below to find the correct message format defined by Vizing.
 
-| baseParams               | Type    | Parameter Definition                           |
-| ------------------------ | ------- | ---------------------------------------------- |
-| destChainId              | uint64  | Destination chain ID                           |
-| earliestArrivalTimestamp | uint64  | Earliest arrival timestamp                     |
-| latestArrivalTimestamp   | uint64  | Latest arrival timestamp                       |
-| sender                   | uint256 | Sender address                                 |
-| relayer                  | uint256 | Relayer address                                |
-| additionalParams         | bytes   | Additional parameters for omni-chain protocols |
-| usrMessage               | bytes   | Arbitrary information                          |
+```solidity
+// code path:`@vizing/contracts/interface/IMessageChannel.sol` 
+
+function Launch(
+	uint64 earliestArrivalTimestamp,
+	uint64 latestArrivalTimestamp,
+	address relayer,
+	address sender,
+	uint256 value,
+	uint64 destChainid,
+	bytes calldata additionParams,
+	bytes calldata message
+) external payable;
+```
+
+| baseParams | Type | Parameter Definition |
+| ---- | ---- | ---- |
+| earliestArrivalTimestamp | uint64 | the earliest arrival time of the message, set 0 to process this message ASAP |
+| latestArrivalTimestamp | uint64 | the latest arrival time of the message, set 0 to process this message ASAP |
+| relayer | uint256 | message relayer, forwards the message to the target chain |
+| sender | uint256 | the message sender |
+| value | uint256 | native token amount, will be sent to the target contract |
+| destChainid | uint64 | Destination chain ID |
+| additionalParams | bytes | Additional parameters for omni-chain protocols |
+| ==usrMessage== | bytes | Arbitrary information  **(details in next chart)** |
 
 In the above table, the format of usrMessage is crucial. You can use custom formats for information without any issues, but you can also utilize the recommended Message format by Vizing to efficiently identify information and execute corresponding operations.
 
-| usrMessage      | Type    | Parameter Definition                                             |
-| --------------- | ------- | ---------------------------------------------------------------- |
-| messageType     | bytes1  | Omni-Message mode                                                |
-| activeContract  | uint256 | Target contract address                                          |
-| executeGasLimit | uint24  | Prepaid gas fee for executing the signature                      |
-| maxFeePerGas    | uint64  | EIP1559 standard, gasPrice reference for executing the signature |
-| signature       | bytes   | Function signature to be executed                                |
+| ==usrMessage== | Parameter Definition |
+| ---- | ---- |
+| messageType | Omni-Message mode |
+| activeContract | Target contract address |
+| executeGasLimit | Prepaid gas fee for executing the signature |
+| maxFeePerGas | EIP1559 standard, gasPrice reference for executing the signature |
+| signature | Function signature to be executed |
+``` solidity
+///
+///    bytes                         
+///   meeeaage  = abi.encodePacked(
+///         byte1           uint256         uint24        uint64        bytes
+///     messageType, activateContract, executeGasLimit, maxFeePerGas, signature
+///   )
+///
+```
 
-Next, format the user request on the source chain Omni-DApp and send it to the Vizing core contract. The following code demonstrates minting tokens as an example:
+choose your Omni-message send mode
+```
+// code path:`@vizing/contracts/library/MessageTypeLib.sol` 
+
+bytes1 constant DEFAULT = 0x00;
+bytes1 constant SDK_ACTIVATE_V1 = 0x01;
+bytes1 constant ARBITRARY_ACTIVATE = 0x02;
+bytes1 constant MESSAGE_POST = 0x03;
+bytes1 constant MAX_MODE = 0xFF;
+```
+
+| item | Parameter Definition |
+| ---- | ---- |
+| DEFAULT | 🚧🚧under construction🚧🚧 |
+| SDK_ACTIVATE_V1 | 🚧🚧under construction🚧🚧 |
+| ARBITRARY_ACTIVATE | interact with destination contract |
+| MESSAGE_POST | post message in destination chain |
+
+Next, format the user request on the source chain Omni-DApp and send it to the Vizing core contract. The following code demonstrates minting tokens as an example.
+
+**We split the main process into 5 steps**
 ```solidity
 // example: mint token in other chain
 function sendOmniMessage(
+	address receiver
     uint256 amount, 
     uint64 destChainld, 
     uint256 contractAddr
 ) public {
+	// step 1: config Omni-Message
+	bytes1 messageMode = "0x02";
+	uint24 gasLimit = 30000;
+	uint64 gasPrice = 50 gwei;
 
-    bytes memory encodeMessage = abi.encodePacked(
-	    MESSSAGE_MODE,
-	    DEFAULT_GASLIMIT,
-	    DEFAULT_GASPRICE,
+	// step 2: encode args of dest-chain contract interface
+	// in destination chain, **receiver** will get **amount** token
+	bytes memory message = abi.encode(
+		receiver,
+		amount
+	);
+
+	// step 3: fetch dest-chain reciever signature
+	// _fetchSignature is Inheritance from VizingOmni
+	bytes memory signature =  _fetchSignature(message);
+
+	// step 4: finalize Omni-Message
+	// PacketMessage is Inheritance from VizingOmni
+    bytes memory encodedMessage = PacketMessage(
+	    messageMode,
+	    gasLimit,
+	    gasPrice,
         contractAddr, 
         signature
     );
-    
-	bytes memory signature = abi.encodeCall(
-		IMessageReceiver.receiveMessage,
-		(LaunchPad.ChainId(), _fetchNonce(), msg.sender, encodeMessage)
+
+	// step 5: send Omni-Message 2 Vizing
+	// emit2LaunchPad is Inheritance from VizingOmni
+	emit2LaunchPad(
+		0,
+		0,
+		0,
+		msg.sender,
+		0,
+		destChainId,
+		new bytes(0),
+		encodedMessage
 	);
-	
-    IMessageStruct.launchSingleMsgParams memory Message = 
-		earlistArrivalTimestamp: uint64(block.timestamp + minArrivalTime),
-		latestArrivalTimestamp: uint64(block.timestamp + maxArrivalTime),
-		relayer: DEFAULT_RELAYER,
-		sender: msg.sender,
-		value: 0,
-		destChainld: destChainld,
-		aditionParams: new bytes(0)
-        message: signature
-	});
-    LaunchPad.Launch{value: msg.value}(Message);
 }
 ```
 
 Receive the message on the target chain. Note that on the target chain DApp, you need to grant permissions to the Vizing LandingPad to call this function.
 
+**only take 1 setp to recieve the message from source chain.**
 ```solidty
-function receiveMessage(
+// _receiveMessage is Inheritance from VizingOmni
+function _receiveMessage(
 	uint64 srcChainId,
 	uint24 nonce,
 	address sender,
 	bytes calldata message
-) internal virtual onlyLandingPad {
+) internal virtual  {
 	(srcChainId, nonce, sender);
 	// decode the message, args is for mint(address toAddress, uint256 amount)
-	(address toAddress, uint256 amount) = abi.decode(
+	(address receiver, uint256 amount) = abi.decode(
 		message,
 		(address, uint256)
 	);
-	mint(toAddress, amount);
+	mint(receiver, amount);
 }
 ```
 
