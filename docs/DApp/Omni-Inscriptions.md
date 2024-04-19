@@ -52,7 +52,8 @@ Currently, this protocol early supports networks including Arbitrum One, Optimis
 
 
 #### Mint
-#### This process does not require user participation. After the source network initiates a claim, the protocol node will automatically execute casting on the target network after the transaction is confirmed.
+> This process does not require user participation. After the source network initiates a claim, the protocol node will automatically execute casting on the target network after the transaction is confirmed.
+
 ```
 {"p": "xxx-20", "fc": 9521, "op": "mint", "amt": "1000", "tick": "Name"}
 ```
