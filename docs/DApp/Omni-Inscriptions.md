@@ -93,7 +93,107 @@ Currently, this protocol early supports networks including Arbitrum One, Optimis
 | fc  | YES | Ex:1 InternalID of the Source Network |
 
 
+### Omni Inscriptions API
+
+
+#### 1. Inscriptions deploy list
+
+`GET` /inscriptions/deploys
+
+##### Request: `Object`
+
+|  Field   | Required  | Remark  |
+|  ----  | ----  | ---- |
+| p  | NO | Ex:xxx-20 Supported Protocol |
+
+##### Response: `Array`
+
+|  Field   | Required  | Remark  |
+|  ----  | ----  | ---- |
+| p | YES | Ex:xxx-20 Supported Protocol |
+| tick | YES | EX:xxx-20 Inscriptions' Name |
+| lim  | YES | Maximum casting amount for a single transaction |
+| max  | YES | Maximum circulation |
+| t | YES | Deploy timestamp |
+| c | YES | Deploy chain InternalID |
+| mined | YES | Ex:`{1: 2000000}`, amount mined per chain |
+
+#### 2. Inscriptions activity list
+
+`GET` /inscriptions/activities
+
+##### Request: `Object`
+
+|  Field   | Required  | Remark  |
+|  ----  | ----  | ---- |
+| p | YES | Ex:xxx-20 Supported Protocol |
+| tick | YES | EX:xxx-20 Inscriptions' Name |
+| account | NO | Account's address |
+| t0 | NO | Start timestamp |
+| t1 | NO | End timestamp |
+
+##### Response: `Array`
+
+|  Field   | Required  | Remark  |
+|  ----  | ----  | ---- |
+| p | YES | Ex:xxx-20 Supported Protocol |
+| tick | YES | EX:xxx-20 Inscriptions' Name |
+| op | YES | `deploy` `mint` `transfer` `cross` |
+| account | YES | Account's address |
+| amt | YES | Ex:1000 Mint Amount |
+| fc | YES | Ex:1 InternalID of the Source Network |
+| fh | YES | Hash of source network |
+| tc | YES | Ex:2 InternalID of the Dest Network |
+| th | YES | Hash of dest network |
+| timestamp | YES | Activity timestamp |
+
+#### 3. Inscriptions ranks
+
+`GET` /inscriptions/ranks
+
+##### Request: `Object`
+
+|  Field   | Required  | Remark  |
+|  ----  | ----  | ---- |
+| p | YES | Ex:xxx-20 Supported Protocol |
+| tick | YES | EX:xxx-20 Inscriptions' Name |
+
+##### Response: `Array`
+
+|  Field   | Required  | Remark  |
+|  ----  | ----  | ---- |
+| p | YES | Ex:xxx-20 Supported Protocol |
+| tick | YES | EX:xxx-20 Inscriptions' Name |
+| account | YES | Ex:1000 Mint Amount |
+| percentage | YES | Percentage of total amount |
+| amount | YES | Amount of account |
+
+#### 4. My mined Inscriptions
+
+`GET` /inscriptions/account/mined
+
+##### Request: `Object`
+
+|  Field   | Required  | Remark  |
+|  ----  | ----  | ---- |
+| p | YES | Ex:xxx-20 Supported Protocol |
+| tick | YES | EX:xxx-20 Inscriptions' Name |
+| account | YES | Account's address |
+
+##### Response: `Array`
+
+|  Field   | Required  | Remark  |
+|  ----  | ----  | ---- |
+| p | YES | Ex:xxx-20 Supported Protocol |
+| tick | YES | EX:xxx-20 Inscriptions' Name |
+| account | YES | Ex:1000 Mint Amount |
+| mined | YES | Ex:`{1: 2000000}`, amount mined per chain |
+
+
 
 ### Supported Rollups
 	Arbitrum One, Optimism, zkSync Era, Base, Linea, Scroll and Polygon zkEVM
 
+### Case
+
+- [Layer2-20](https://www.layer220.io/)
