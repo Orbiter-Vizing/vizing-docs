@@ -73,7 +73,7 @@ const config: Config = {
         },
         {
           // to: '/blog',
-          href: "https://vizing.medium.com/",
+          href: "https://medium.com/@Vizing_L2",
           label: "Blog",
           position: "left",
         },
@@ -101,15 +101,15 @@ const config: Config = {
           items: [
             {
               label: "Medium",
-              href: "https://vizing.medium.com/",
+              href: "https://medium.com/@Vizing_L2",
             },
             {
               label: "Discord",
-              href: "https://discord.com/invite/vizing",
+              href: "https://discord.com/invite/FbztTBvnBT",
             },
             {
               label: "Twitter",
-              href: "https://twitter.com/vizing_l2",
+              href: "https://twitter.com/Vizing_l2",
             },
           ],
         },
@@ -119,7 +119,7 @@ const config: Config = {
             {
               label: "Blog",
               // to: '/blog',
-              href: "https://vizing.medium.com/",
+              href: "https://medium.com/@Vizing_L2",
             },
             {
               label: "GitHub",
