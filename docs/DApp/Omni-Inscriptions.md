@@ -106,7 +106,7 @@ Currently, this protocol early supports networks including Arbitrum One, Optimis
 |  ----  | ----  | ---- |
 | p  | NO | Ex:xxx-20 Supported Protocol |
 
-##### Response: `Array`
+##### Response: `Array[Object]`
 
 |  Field   | Required  | Remark  |
 |  ----  | ----  | ---- |
@@ -114,13 +114,13 @@ Currently, this protocol early supports networks including Arbitrum One, Optimis
 | tick | YES | EX:xxx-20 Inscriptions' Name |
 | lim  | YES | Maximum casting amount for a single transaction |
 | max  | YES | Maximum circulation |
-| t | YES | Deploy timestamp |
 | c | YES | Deploy chain InternalID |
-| mined | YES | Ex:`{1: 2000000}`, amount mined per chain |
+| t | YES | Deploy timestamp |
+| mined | YES | Ex:`{1: 2000000,2: 300000}`, amount mined per chain |
 
-#### 2. Inscriptions activity list
+#### 2. Inscriptions transactions
 
-`GET` /inscriptions/activities
+`GET` /inscriptions/transactions
 
 ##### Request: `Object`
 
@@ -132,20 +132,20 @@ Currently, this protocol early supports networks including Arbitrum One, Optimis
 | t0 | NO | Start timestamp |
 | t1 | NO | End timestamp |
 
-##### Response: `Array`
+##### Response: `Array[Object]`
 
 |  Field   | Required  | Remark  |
 |  ----  | ----  | ---- |
 | p | YES | Ex:xxx-20 Supported Protocol |
 | tick | YES | EX:xxx-20 Inscriptions' Name |
-| op | YES | `deploy` `mint` `transfer` `cross` |
+| op | YES | `mint` `transfer` `cross` |
 | account | YES | Account's address |
-| amt | YES | Ex:1000 Mint Amount |
+| amt | YES | Ex:1000 Mint Amount. |
 | fc | YES | Ex:1 InternalID of the Source Network |
 | fh | YES | Hash of source network |
 | tc | YES | Ex:2 InternalID of the Dest Network |
 | th | YES | Hash of dest network |
-| timestamp | YES | Activity timestamp |
+| t | YES | Transaction timestamp |
 
 #### 3. Inscriptions ranks
 
@@ -158,7 +158,7 @@ Currently, this protocol early supports networks including Arbitrum One, Optimis
 | p | YES | Ex:xxx-20 Supported Protocol |
 | tick | YES | EX:xxx-20 Inscriptions' Name |
 
-##### Response: `Array`
+##### Response: `Array[Object]`
 
 |  Field   | Required  | Remark  |
 |  ----  | ----  | ---- |
@@ -180,14 +180,14 @@ Currently, this protocol early supports networks including Arbitrum One, Optimis
 | tick | YES | EX:xxx-20 Inscriptions' Name |
 | account | YES | Account's address |
 
-##### Response: `Array`
+##### Response: `Array[Object]`
 
 |  Field   | Required  | Remark  |
 |  ----  | ----  | ---- |
 | p | YES | Ex:xxx-20 Supported Protocol |
 | tick | YES | EX:xxx-20 Inscriptions' Name |
 | account | YES | Ex:1000 Mint Amount |
-| mined | YES | Ex:`{1: 2000000}`, amount mined per chain |
+| mined | YES | Ex:`{1: 2000000,2: 300000}`, amount mined per chain |
 
 
 
