@@ -116,7 +116,7 @@ Currently, this protocol early supports networks including Arbitrum One, Optimis
 | max  | YES | Maximum circulation |
 | c | YES | Deploy chain InternalID |
 | t | YES | Deploy timestamp |
-| mined | YES | Ex:`{1: 2000000,2: 300000}`, amount mined per chain |
+| mined | YES | Ex:`{1: {amount: 2000000, accounts: 100}}`, amount & accounts mined per chain |
 
 #### 2. Inscriptions transactions
 
@@ -157,6 +157,8 @@ Currently, this protocol early supports networks including Arbitrum One, Optimis
 |  ----  | ----  | ---- |
 | p | YES | Ex:xxx-20 Supported Protocol |
 | tick | YES | EX:xxx-20 Inscriptions' Name |
+| page | NO | Page index. Default: 1 |
+| size | NO | Page size. Default: 10 |
 
 ##### Response: `Array[Object]`
 
