@@ -158,7 +158,7 @@ Currently, this protocol early supports networks including Arbitrum One, Optimis
 | p | YES | Ex:xxx-20 Supported Protocol |
 | tick | YES | EX:xxx-20 Inscriptions' Name |
 | page | NO | Page index. Default: 1 |
-| size | NO | Page size. Default: 10 |
+| size | NO | Page size. Default: 10, max: 1000 |
 
 ##### Response: `Array[Object]`
 
