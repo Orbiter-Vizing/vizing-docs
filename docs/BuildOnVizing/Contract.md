@@ -136,7 +136,7 @@ function sendOmniMessage(
 		additionParams,
 		encodedMessage
 	)
-	require(msg.value >= gasFee);
+	require(msg.value >= gasFee + transferValue);
     
 	// step 5: send Omni-Message 2 Vizing
 	// emit2LaunchPad is Inheritance from VizingOmni
