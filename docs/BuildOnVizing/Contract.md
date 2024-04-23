@@ -14,7 +14,7 @@ Incorporate Vizing core contracts into your Omni-DApp:
 ```solidity
 import {VizingOmni} from "@Vizing/contracts/VizingStation.sol";
 contract MyOmniChainDApp is VizingOmni {
-    constructor(address _vizingPad) VizingOmni(__vizingPad) {
+    constructor(address _vizingPad) VizingOmni(_vizingPad) {
 	    // Logic
     }
 }
