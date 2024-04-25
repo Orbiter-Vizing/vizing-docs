@@ -60,7 +60,7 @@ In the above table, the format of usrMessage is crucial. You can use custom form
 ``` solidity
 ///
 ///    bytes                         
-///   meeeaage  = abi.encodePacked(
+///   message  = abi.encodePacked(
 ///         byte1           uint256         uint24        uint64        bytes
 ///     messageType, activateContract, executeGasLimit, maxFeePerGas, signature
 ///   )
