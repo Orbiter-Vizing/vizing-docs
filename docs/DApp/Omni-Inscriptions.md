@@ -115,7 +115,8 @@ Currently, this protocol early supports networks including Arbitrum One, Optimis
 | lim  | YES | Maximum casting amount for a single transaction |
 | max  | YES | Maximum circulation |
 | c | YES | Deploy chain InternalID |
-| t | YES | Deploy timestamp |
+| t | YES | Deploy timestamp(UNIX) |
+| accounts | YES | accounts mined all chain |
 | mined | YES | Ex:`{1: {amount: 2000000, accounts: 100}}`, amount & accounts mined per chain |
 
 #### 2. Inscriptions transactions
