@@ -183,3 +183,5 @@ Receives messages on the destination chain. Note that on the target chain DApp, 
 After receiving the message, the LandingHook is triggered to execute. The hook obtains the current Landing status. The correct status triggers the ERC20 Transfer.
 
 Please note that at present, the LandingHook event can only be triggered after receiving the message, that is, the token transfer can be completed at this moment.
+
+If you need a deeper understanding of how to integrate Vizing Core Contracts, you can refer to the Demo we implemented: [vizing-core/contracts/DApps/SimultaneousErc20TokenTransfer](https://github.com/Orbiter-Vizing/vizing-core/blob/main/contracts/DApps/SimultaneousErc20TokenTransfer/SimultaneousTokenTransfer.sol)
