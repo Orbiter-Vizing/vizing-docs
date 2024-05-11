@@ -23,7 +23,7 @@ Vizing is deployed on all Layer 2 networks, including testnets, empowering devel
 | Optimism-sepolia | 🚧🚧under construction🚧🚧 |
 | Blast-testnet | 🚧🚧under construction🚧🚧 |
 | Scroll-sepolia | 🚧🚧under construction🚧🚧 |
-| zkSync-sepoli | 🚧🚧under construction🚧🚧 |
+| zkSync-sepolia | 🚧🚧under construction🚧🚧 |
 
 ## Vizing Rollup Resources
 
