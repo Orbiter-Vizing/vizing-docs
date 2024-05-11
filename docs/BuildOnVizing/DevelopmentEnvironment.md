@@ -19,7 +19,11 @@ Vizing is deployed on all Layer 2 networks, including testnets, empowering devel
 | Arbitrum-sepolia | 0x0B5a8E5494DDE7039781af500A49E7971AE07a6b |
 | Bob-testnet | 0x0B5a8E5494DDE7039781af500A49E7971AE07a6b |
 | PolygonzkEVM-Cardona | 0x0B5a8E5494DDE7039781af500A49E7971AE07a6b |
-| xlayer-testnet | 0x0B5a8E5494DDE7039781af500A49E7971AE07a6b |
+| XLayer-testnet | 0x0B5a8E5494DDE7039781af500A49E7971AE07a6b |
+| Optimism-sepolia | 🚧🚧under construction🚧🚧 |
+| Blast-testnet | 🚧🚧under construction🚧🚧 |
+| Scroll-sepolia | 🚧🚧under construction🚧🚧 |
+| zkSync-sepoli | 🚧🚧under construction🚧🚧 |
 
 ## Vizing Rollup Resources
 
