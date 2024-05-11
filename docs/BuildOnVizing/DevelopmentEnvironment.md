@@ -5,6 +5,22 @@ sidebar_position: 1
 
 Vizing is deployed on all Layer 2 networks, including testnets, empowering developers to test Omni-DApp functionalities on testnets and seamlessly migrate Omni-DApps to the mainnet afterward.
 
+## Vizing Omni Resources
+### Mainnet
+| network | vizingPad |
+| ---- | ---- |
+| 🚧🚧under construction🚧🚧 | 🚧🚧under construction🚧🚧 |
+### Testnet
+| network | vizingPad |
+| ---- | ---- |
+| Sepolia | 0x0B5a8E5494DDE7039781af500A49E7971AE07a6b |
+| Vizing-testnet | 0x0B5a8E5494DDE7039781af500A49E7971AE07a6b |
+| Base-sepolia | 0x0B5a8E5494DDE7039781af500A49E7971AE07a6b |
+| Arbitrum-sepolia | 0x0B5a8E5494DDE7039781af500A49E7971AE07a6b |
+| Bob-testnet | 0x0B5a8E5494DDE7039781af500A49E7971AE07a6b |
+| PolygonzkEVM-Cardona | 0x0B5a8E5494DDE7039781af500A49E7971AE07a6b |
+| xlayer-testnet | 0x0B5a8E5494DDE7039781af500A49E7971AE07a6b |
+
 ## Vizing Rollup Resources
 
 ### Mainnet
