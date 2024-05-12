@@ -72,7 +72,7 @@ choose your Omni-message send mode
 // code path:`@vizing/contracts/library/MessageTypeLib.sol` 
 
 bytes1 constant DEFAULT = 0x00;
-bytes1 constant SDK_ACTIVATE_V1 = 0x01;
+bytes1 constant STANDARD_ACTIVATE = 0x01;
 bytes1 constant ARBITRARY_ACTIVATE = 0x02;
 bytes1 constant MESSAGE_POST = 0x03;
 bytes1 constant MAX_MODE = 0xFF;
@@ -81,13 +81,13 @@ bytes1 constant MAX_MODE = 0xFF;
 | item | Parameter Definition |
 | ---- | ---- |
 | DEFAULT | 🚧🚧under construction🚧🚧 |
-| SDK_ACTIVATE_V1 | 🚧🚧under construction🚧🚧 |
+| STANDARD_ACTIVATE | interact with destination contract with trusted extral message |
 | ARBITRARY_ACTIVATE | interact with destination contract |
 | MESSAGE_POST | post message in destination chain |
 
 Next, format the user request on the source chain Omni-DApp and send it to the Vizing core contract. The following code demonstrates minting tokens as an example.
 
-**We split the main process into 5 steps**
+**We split the main process into 4 steps**
 ```solidity
 // example: mint token in other chain
 function sendOmniMessage(
@@ -97,7 +97,7 @@ function sendOmniMessage(
     uint256 contractAddr
 ) public {
 	// step 1: config Omni-Message
-	bytes1 messageMode = "0x02";
+	bytes1 messageMode = "0x01";
 	uint24 gasLimit = 30000;
 	uint64 gasPrice = 50 gwei;
 	uint64 earliestArrivalTimestamp = (uint64(block.timestamp) + 3 minutes);
@@ -114,22 +114,19 @@ function sendOmniMessage(
 		amount
 	);
 
-	// step 3: fetch dest-chain reciever signature
-	// _fetchSignature is Inheritance from VizingOmni
-	bytes memory signature =  _fetchSignature(message);
-
-	// step 4: finalize Omni-Message
+	// step 3: finalize Omni-Message
 	// PacketMessage is Inheritance from VizingOmni
     bytes memory encodedMessage = PacketMessage(
 	    messageMode,
 	    gasLimit,
 	    gasPrice,
         contractAddr, 
-        signature
+        message
     );
 
-	// step 4.1 (Optional) obtain Vizing GasFee
+	// step 3.1 (Optional) obtain Vizing GasFee
 	// explained in next section
+	// we recommended to calculate the gas value in your front-end program
 	uint256 gasFee = fetchOmniMessageFee(
 		transferValue,
 		destChainId,
@@ -138,7 +135,7 @@ function sendOmniMessage(
 	)
 	require(msg.value >= gasFee + transferValue);
     
-	// step 5: send Omni-Message 2 Vizing
+	// step 4: send Omni-Message 2 Vizing
 	// emit2LaunchPad is Inheritance from VizingOmni
 	emit2LaunchPad(
 		earliestArrivalTimestamp,
@@ -180,17 +177,13 @@ Receive the message on the target chain. Note that on the target chain DApp, you
 // _receiveMessage is Inheritance from VizingOmni
 function _receiveMessage(
 	uint64 srcChainId,
-	uint24 nonce,
-	address sender,
+	uint256 srcContract,
 	bytes calldata message
-) internal virtual  {
-	(srcChainId, nonce, sender);
-	// decode the message, args is for mint(address toAddress, uint256 amount)
-	(address receiver, uint256 amount) = abi.decode(
-		message,
-		(address, uint256)
-	);
-	mint(receiver, amount);
+) internal virtual override {
+	// check if source Contract in white list 
+	if (whiteList[srcChainId] != address(uint160(srcContract))) {
+		revert InvalidData();
+	}
 }
 ```
 
