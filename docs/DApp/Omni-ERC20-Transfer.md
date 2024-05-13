@@ -5,27 +5,36 @@ sidebar_position: 4
 First, merge the Vising core contract as well as the IExpertHook interface contract into your Omni-DApp
 
 ```solidity
-import {VizingOmni} from "../../VizingOmni.sol";
+import {VizingOmniUpgradeable} from "../../VizingOmni-upgradeable.sol";
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import {SafeERC20} from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 import {IExpertHook, ExpertHookTransfer} from "../../interface/IExpertHook.sol";
 
-contract SimultaneousTokenTransfer is Ownable, VizingOmni, ExpertHookTransfer {
-	constructor(address _vizingPad) Ownable(msg.sender) VizingOmni(_vizingPad) {}
+contract SimultaneousTokenTransfer is
+    Ownable,
+    VizingOmniUpgradeable,
+    ExpertHookTransfer
+{
+    // Don't forget to allow contracts to accept ETH to transfer from ETH to WETH.
+    receive() external payable {}
+
+    constructor(address _vizingPad) Ownable(msg.sender) {
+        __VizingOmniInit(_vizingPad);
+    }
 }
 ```
 
 Next, the user request is formatted on the source chain Omni-DApp and sent to the Vzing core contract. The following code demonstrates the transfer of ERC20 tokens at the same time as the destination contract interaction.
 
-We divide the main process into 4 steps
+We divide the main process into 5 steps
 
 ```solidity
     // Step 1: config Omni-Message
-    uint24 private constant GAS_LIMIT = 50000;
+    uint24 private constant GAS_LIMIT = 80000;
 
     bytes1 constant ERC20_HANDLER = 0x03;
-    bytes1 constant BRIDGE_MODE = 0x02;
+    bytes1 constant BRIDGE_MODE = 0x01;
 
     uint64 public immutable override minArrivalTime;
     uint64 public immutable override maxArrivalTime;
@@ -43,35 +52,50 @@ We divide the main process into 4 steps
         // The user should transfer this amount
         uint256 totalAmount = computeTotalAmont(destChainid, token, amount);
         // Start when interchanging eth and weth
-        bool isETH = IExpertHook(LaunchPad.expertLaunchHook(ERC20_HANDLER)).isETH(token);
-        _tokenHandlingStrategy(token, msg.sender, address(this), totalAmount, isETH);
-
-        bytes memory additionParams = new bytes(1);
-        additionParams[0] = ERC20_HANDLER;
-        
-        // Step 3: finalize Omni-Message
-        // PacketMessageSimultaneousToken is Inheritance from VizingOmni
-        bytes memory message = PacketMessageSimultaneousToken(
-            BRIDGE_MODE,
-            mirrorMessage[destChainid],
-            GAS_LIMIT,
-            _fetchPrice(destChainid),
-            IExpertHook(LaunchPad.expertLaunchHook(ERC20_HANDLER)).getTokenInfoBase(token).symbol,
+        bool isETH = IExpertHook(LaunchPad.expertLaunchHook(ERC20_HANDLER))
+            .isETH(token);
+        _tokenHandlingStrategy(
+            token,
             msg.sender,
             address(this),
-            amount,// here is the amount without fee
-            // Step 2: encode args of dest-chain contract interface, 
-            // and fetch dest-chain reciever signature
-            _fetchTransferSignature(sendMessage) 
+            totalAmount,
+            isETH
         );
+
+        // Step 2: encode args of AdditionParams (Token transfer details)
+        bytes memory additionParams = PacketAdditionParams(
+            ERC20_HANDLER,
+            IExpertHook(LaunchPad.expertLaunchHook(ERC20_HANDLER))
+                .getTokenInfoBase(token)
+                .symbol,
+            msg.sender,
+            address(this),
+            amount
+        );
+
+        // Step 3: encode args of dest-chain contract interface, 
+        // and fetch dest-chain reciever signature
+        bytes memory encodeMessage = abi.encode(sendMessage);
         
-        // step 3.1 (Optional) obtain Vizing GasFee
-        // explained in next section
-        uint256 gasFee = fetchTransferFee(destChainId, token, amount, additionParams, sendMessage);
-        require(msg.value >= gasFee);
+        
+        // Step 4: finalize Omni-Message
+        // PacketMessage is Inheritance from VizingOmni
+        bytes memory message = PacketMessage(
+            BRIDGE_MODE,
+            mirrorMessage[destChainId],
+            GAS_LIMIT,
+            _fetchPrice(destChainId),
+            encodeMessage
+        );
 				
-        // step 4: send Omni-Message 2 Vizing
-        _bridgeTransferHandler(destChainid, message, additionParams, totalAmount, isETH);
+        // Step 5: send Omni-Message 2 Vizing
+        _bridgeTransferHandler(
+            destChainId,
+            message,
+            additionParams,
+            totalAmount,
+            isETH
+        );
     }
     
     // Need to calculate the tradefee of tokens  
@@ -82,18 +106,6 @@ We divide the main process into 4 steps
     {
         totalAmount =
             IExpertHook(LaunchPad.expertLaunchHook(ERC20_HANDLER)).computeTotalAmont(destChainid, token, amount);
-    }
-    
-    // For reference, encode only the message as a parameter. 
-    // In fact, you may need to encode the user address, user transfer amount, etc.  
-    function _fetchTransferSignature(string memory sendMessage)
-        internal
-        view
-        virtual
-        returns (bytes memory signature)
-    {
-        // _fetchSignature is Inheritance from VizingOmni
-        signature = _fetchSignature(abi.encode(sendMessage));
     }
     
     function _bridgeTransferHandler(
@@ -121,10 +133,19 @@ At the same time, in order to make the LaunchHook better handle the transfer log
 
 ```solidity
     // _tokenTransferByHook is Inheritance from ExpertHookTransfer
-    function _tokenTransferByHook(address token, address reveiver, uint256 amount) internal virtual override {
-        require(msg.sender == LaunchPad.expertLaunchHook(ERC20_HANDLER), "expertLaunchHook");
-        if (IExpertHook(LaunchPad.expertLaunchHook(ERC20_HANDLER)).isETH(token)) {
-            (bool sent,) = payable(reveiver).call{value: amount}("");
+    function _tokenTransferByHook(
+        address token,
+        address reveiver,
+        uint256 amount
+    ) internal virtual override {
+        require(
+            msg.sender == LaunchPad.expertLaunchHook(ERC20_HANDLER),
+            "expertLaunchHook"
+        );
+        if (
+            IExpertHook(LaunchPad.expertLaunchHook(ERC20_HANDLER)).isETH(token)
+        ) {
+            (bool sent, ) = payable(reveiver).call{value: amount}("");
             if (!sent) {
                 revert Transfer_To_Hook();
             }
@@ -143,21 +164,24 @@ In our example, many parameters are written in the function for the convenience 
         uint64 destChainid,
         address token,
         uint256 amount,
-        bytes memory additionParams,
         string memory sendMessage
     ) public view returns (uint256) {
-        bool isETH = IExpertHook(LaunchPad.expertLaunchHook(ERC20_HANDLER)).isETH(token);
-
-        bytes memory message = PacketMessageSimultaneousToken(
+        bytes memory additionParams = PacketAdditionParams(
+            ERC20_HANDLER,
+            IExpertHook(LaunchPad.expertLaunchHook(ERC20_HANDLER))
+                .getTokenInfoBase(token)
+                .symbol,
+            msg.sender,
+            address(this),
+            amount
+        );
+        bytes memory encodeMessage = abi.encode(sendMessage);
+        bytes memory message = PacketMessage(
             BRIDGE_MODE,
             mirrorMessage[destChainid],
             GAS_LIMIT,
             _fetchPrice(destChainid),
-            IExpertHook(LaunchPad.expertLaunchHook(ERC20_HANDLER)).getTokenInfoBase(token).symbol,
-            msg.sender,
-            address(this),
-            amount,
-            _fetchTransferSignature(sendMessage)
+            encodeMessage
         );
         return _estimateVizingGasFee(0, destChainid, additionParams, message);
     }
@@ -169,12 +193,11 @@ Receives messages on the destination chain. Note that on the target chain DApp, 
 
 ```solidity
     // _receiveMessage is Inheritance from VizingOmni
-    function _receiveMessage(uint64, /*srcChainId*/ address, /*sender*/ bytes calldata message)
-        internal
-        virtual
-        override
-    {
-        console.log("receiver message");
+    function _receiveMessage(
+        uint64,
+        /*srcChainId*/ uint256,
+        /*srcContract*/ bytes calldata message
+    ) internal virtual override {
         string memory m = abi.decode(message, (string));
         console.logString(m);
     }
