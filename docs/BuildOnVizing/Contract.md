@@ -185,6 +185,6 @@ function _receiveMessage(
 }
 ```
 
-If you need a deeper understanding of how to integrate Vizing Core Contracts, you can refer to the Demo we implemented: [vizing-core/contracts/DApps/OminiToken](https://github.com/Orbiter-Vizing/vizing-core/blob/main/contracts/DApps/OminiToken/OmniTokenCore.sol)
+If you need a deeper understanding of how to integrate Vizing Core Contracts, you can refer to the Demo we implemented: [vizing-demo (github.com)](https://github.com/Orbiter-Vizing/vizing-core/tree/main/contracts/DApps)
 
 Congratulations! With the completion of these simple steps, you now have an Omni-DApp. Great job!
