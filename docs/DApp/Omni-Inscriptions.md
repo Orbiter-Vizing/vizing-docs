@@ -132,6 +132,8 @@ Currently, this protocol early supports networks including Arbitrum One, Optimis
 | account | NO | Account's address |
 | t0 | NO | Start timestamp |
 | t1 | NO | End timestamp |
+| page | NO | Page index. Default: 1 |
+| size | NO | Page size. Default: 10, max: 1000 |
 
 ##### Response: `Array[Object]`
 
@@ -167,7 +169,7 @@ Currently, this protocol early supports networks including Arbitrum One, Optimis
 |  ----  | ----  | ---- |
 | p | YES | Ex:xxx-20 Supported Protocol |
 | tick | YES | EX:xxx-20 Inscriptions' Name |
-| account | YES | Ex:1000 Mint Amount |
+| account | YES | Account's address |
 | percentage | YES | Percentage of total amount |
 | amount | YES | Amount of account |
 
@@ -189,7 +191,7 @@ Currently, this protocol early supports networks including Arbitrum One, Optimis
 |  ----  | ----  | ---- |
 | p | YES | Ex:xxx-20 Supported Protocol |
 | tick | YES | EX:xxx-20 Inscriptions' Name |
-| account | YES | Ex:1000 Mint Amount |
+| account | YES | Account's address |
 | mined | YES | Ex:`{1: 2000000,2: 300000}`, amount mined per chain |
 
 
