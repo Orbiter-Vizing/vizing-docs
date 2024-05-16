@@ -31,7 +31,7 @@ Currently, this protocol early supports networks including Arbitrum One, Optimis
 | tick  | YES | EX:GOOD•LUCK Runes' Name |
 | symbol | YES | Rune's currency symbol |
 | pre | YES | Premined quantity |
-| end | YES | Mint end timestamp(ms) |
+| end | YES | Mint end timestamp |
 - Tick
   - Names consist of the letters A through Z and are between one and twenty-eight letters long. For example GOODLUCK is a rune name.
   - Names may contain spacers, represented as bullets, to aid readability. GOODLUCK might be etched as GOOD•LUCK.
