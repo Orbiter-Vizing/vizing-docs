@@ -1,5 +1,5 @@
 ---
-sidebar_position: 3
+sidebar_position: 5
 ---
 # Omni-Runes
 
@@ -20,7 +20,7 @@ Currently, this protocol early supports networks including Arbitrum One, Optimis
 > Note: The protocol + tick will form a unique identifier in the entire network. If the contract protocol and tick you are not familiar with already exist, your deployment will be invalid.
 
 ```
-{"r": "runes", "op": "deploy", "lim": "10000", "max": "xxxxx", "tick": "NAME"}
+{"r": "runes", "op": "deploy", "lim": "10000", "max": "xxxxx", "tick": "MY•NAME", "symbol": "N", "pre": "0", "end": "0"}
 ```
 |  Field   | Required  | Remark  |
 |  ----  | ----  | ---- |
@@ -45,7 +45,7 @@ Currently, this protocol early supports networks including Arbitrum One, Optimis
 
 - Basic data
 ```
-{"r": "runes", "op": "claim", "amt": "1000", "tick": "NAME"}
+{"r": "runes", "op": "claim", "amt": "1000", "tick": "MY•NAME"}
 ```
 |  Field   | Required  | Remark  |
 |  ----  | ----  | ---- |
@@ -63,7 +63,7 @@ Currently, this protocol early supports networks including Arbitrum One, Optimis
 > This process does not require user participation. After the source network initiates a claim, the protocol node will automatically execute casting on the target network after the transaction is confirmed.
 
 ```
-{"r": "runes", "fc": 9521, "op": "mint", "amt": "1000", "tick": "NAME"}
+{"r": "runes", "fc": 9521, "op": "mint", "amt": "1000", "tick": "MY•NAME"}
 ```
 |  Field   | Required  | Remark  |
 |  ----  | ----  | ---- |
@@ -79,7 +79,7 @@ Currently, this protocol early supports networks including Arbitrum One, Optimis
 
 #### Cross
 ```
-{"r": "runes", "op": "cross", "amt": "1000", "tick": "NAME"}
+{"r": "runes", "op": "cross", "amt": "1000", "tick": "MY•NAME"}
 ```
 |  Field   | Required  | Remark  |
 |  ----  | ----  | ---- |
@@ -90,7 +90,7 @@ Currently, this protocol early supports networks including Arbitrum One, Optimis
 
 #### Crossover
 ```
-{"r": "runes", "fc": 9521, "op": "crossover", "amt": "1000", "tick": "NAME"}
+{"r": "runes", "fc": 9521, "op": "crossover", "amt": "1000", "tick": "MY•NAME"}
 ```
 |  Field   | Required  | Remark  |
 |  ----  | ----  | ---- |
@@ -122,6 +122,10 @@ Currently, this protocol early supports networks including Arbitrum One, Optimis
 | tick | YES | EX:GOOD•LUCK Runes' Name |
 | lim  | YES | Maximum casting amount for a single transaction |
 | max  | YES | Maximum circulation |
+| symbol | YES | Rune's currency symbol |
+| spacers | YES | Rune's name separator |
+| pre | YES | Premined quantity |
+| end | YES | Mint end timestamp |
 | c | YES | Deploy chain InternalID |
 | t | YES | Deploy timestamp(UNIX) |
 | accounts | YES | accounts mined all chain |
