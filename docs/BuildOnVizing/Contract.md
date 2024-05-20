@@ -41,8 +41,8 @@ function Launch(
 | ---- | ---- | ---- |
 | earliestArrivalTimestamp | uint64 | the earliest arrival time of the message. set to 0, vizing will forward the information ASAP. |
 | latestArrivalTimestamp | uint64 | the latest arrival time of the message. set to 0, vizing will forward the information ASAP. |
-| relayer | uint256 | message relayer, forwards the message to the target chain. set to 0, all the relayers will be able to forward the message |
-| sender | uint256 | most likely the address of the EOA, the user of some DApps |
+| relayer | address | message relayer, forwards the message to the target chain. set to 0, all the relayers will be able to forward the message |
+| sender | address | most likely the address of the EOA, the user of some DApps |
 | value | uint256 | native token amount, will be sent to the target contract on destination chain |
 | destChainid | uint64 | Destination chain ID |
 | additionalParams | bytes | Additional parameters for omni-chain protocols, if not in expert mode, set to 0 (`new bytes(0)`) |
@@ -185,6 +185,6 @@ function _receiveMessage(
 }
 ```
 
-If you need a deeper understanding of how to integrate Vizing Core Contracts, you can refer to the Demo we implemented: [vizing-demo (github.com)](https://github.com/Orbiter-Vizing/vizing-core/tree/main/contracts/DApps)
+If you need a deeper understanding of how to integrate Vizing Core Contracts, you can refer to the Demo we implemented: [vizing-demo (github.com)](https://github.com/Orbiter-Vizing/vizing_npm_package/tree/main/DApps)
 
 Congratulations! With the completion of these simple steps, you now have an Omni-DApp. Great job!
