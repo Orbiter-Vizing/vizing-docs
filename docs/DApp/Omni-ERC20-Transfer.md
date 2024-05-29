@@ -2,7 +2,7 @@
 sidebar_position: 4
 ---
 #  Omni-ERC20-Transfer
-First, merge the Vising core contract as well as the IExpertHook interface contract into your Omni-DApp
+First, merge the Vizing core contract as well as the IExpertHook interface contract into your Omni-DApp
 
 ```solidity
 import {VizingOmniUpgradeable} from "../../VizingOmni-upgradeable.sol";
@@ -157,7 +157,7 @@ At the same time, in order to make the LaunchHook better handle the transfer log
 
 Please wait, the gas fee will be charged for vizing to send full chain messages. You can call the `_estimateVizingGasFee` method before starting the message. When you inherit VizingOmni contract, this method is already free to use.
 
-In our example, many parameters are written in the function for the convenience of testing. Please develop them according to the actual situation in the specific business. Developers can get Vising GasFee `fetchTransferFee` calling this method on-chain or off-chain
+In our example, many parameters are written in the function for the convenience of testing. Please develop them according to the actual situation in the specific business. Developers can get Vizing GasFee `fetchTransferFee` calling this method on-chain or off-chain
 
 ```solidity
     function fetchTransferFee(
