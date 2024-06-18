@@ -133,9 +133,8 @@ function sendOmniMessage(
 
 	require(msg.value >= gasFee + transferValue);
 
-	// step 4: send Omni-Message 2 Vizing
-	// emit2LaunchPad is Inheritance from VizingOmni
-	emit2LaunchPad(
+	// step 4: send Omni-Message 2 Vizing Launch Pad
+	LaunchPad.Launch{value: msg.value}(
 		earliestArrivalTimestamp,
 		latestArrivalTimestamp,
 		selectedRelayer,
